@@ -42,4 +42,13 @@ public class News {
     public void setArticle(List<Article> article) {
         this.article = article;
     }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "status='" + status + '\'' +
+                ", totalResult='" + totalResult + '\'' +
+                ", article=" + article +
+                '}';
+    }
 }

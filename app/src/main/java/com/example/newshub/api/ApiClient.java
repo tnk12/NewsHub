@@ -15,23 +15,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://newsapi.org/v2/";
-    public static Retrofit retrofit;
+    private static String BASE_URL = "https://newsapi.org";
+    private static Retrofit retrofit;
 
-    public static Retrofit getApiClient(){
-
-        if (retrofit == null){
-            retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
-                    .client(getUnsafeOkHttpClient().build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-
+    public static Retrofit getApiClient() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         return retrofit;
     }
 
-    public static OkHttpClient.Builder getUnsafeOkHttpClient(){
-
+    public static OkHttpClient.Builder getUnsafeOkHttpClient() {
         try {
             final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
@@ -49,7 +44,6 @@ public class ApiClient {
                         }
                     }
             };
-
 
             final SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
@@ -69,7 +63,6 @@ public class ApiClient {
             throw new RuntimeException(e);
         }
     }
-
 }
 
 

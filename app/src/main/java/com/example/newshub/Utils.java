@@ -13,26 +13,23 @@ import java.util.Random;
 
 
 public class Utils {
-
-
-    public static ColorDrawable[] vibrantLightColorList =
-            {
-                    new ColorDrawable(Color.parseColor("#ffeead")),
-                    new ColorDrawable(Color.parseColor("#93cfb3")),
-                    new ColorDrawable(Color.parseColor("#fd7a7a")),
-                    new ColorDrawable(Color.parseColor("#faca5f")),
-                    new ColorDrawable(Color.parseColor("#1ba798")),
-                    new ColorDrawable(Color.parseColor("#6aa9ae")),
-                    new ColorDrawable(Color.parseColor("#ffbf27")),
-                    new ColorDrawable(Color.parseColor("#d93947"))
-            };
+    public static ColorDrawable[] vibrantLightColorList = {
+            new ColorDrawable(Color.parseColor("#ffeead")),
+            new ColorDrawable(Color.parseColor("#93cfb3")),
+            new ColorDrawable(Color.parseColor("#fd7a7a")),
+            new ColorDrawable(Color.parseColor("#faca5f")),
+            new ColorDrawable(Color.parseColor("#1ba798")),
+            new ColorDrawable(Color.parseColor("#6aa9ae")),
+            new ColorDrawable(Color.parseColor("#ffbf27")),
+            new ColorDrawable(Color.parseColor("#d93947"))
+    };
 
     public static ColorDrawable getRandomDrawbleColor() {
         int idx = new Random().nextInt(vibrantLightColorList.length);
         return vibrantLightColorList[idx];
     }
 
-    public static String DateToTimeFormat(String oldstringDate){
+    public static String DateToTimeFormat(String oldstringDate) {
         PrettyTime p = new PrettyTime(new Locale(getCountry()));
         String isTime = null;
         try {
@@ -43,11 +40,10 @@ public class Utils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return isTime;
     }
 
-    public static String DateFormat(String oldstringDate){
+    public static String DateFormat(String oldstringDate) {
         String newDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("E, d MMM yyyy", new Locale(getCountry()));
         try {
@@ -57,11 +53,10 @@ public class Utils {
             e.printStackTrace();
             newDate = oldstringDate;
         }
-
         return newDate;
     }
 
-    public static String getCountry(){
+    public static String getCountry() {
         Locale locale = Locale.getDefault();
         String country = String.valueOf(locale.getCountry());
         return country.toLowerCase();
