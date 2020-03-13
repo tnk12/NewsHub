@@ -23,14 +23,14 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.newshub.models.Article;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
-
-private List<Article> articles;
-private Context context;
-private OnItemClickListener onItemClickListener;
+    private List<Article> articles;
+    private Context context;
+    private OnItemClickListener onItemClickListener;
 
     public Adapter(List<Article> articles, Context context) {
         this.articles = articles;
@@ -40,10 +40,8 @@ private OnItemClickListener onItemClickListener;
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.item,parent,false);
-
-        return new MyViewHolder(view,onItemClickListener);
+        View view = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
+        return new MyViewHolder(view, onItemClickListener);
     }
 
     @Override
@@ -74,15 +72,13 @@ private OnItemClickListener onItemClickListener;
                         return false;
                     }
                 })
-               .transition(DrawableTransitionOptions.withCrossFade())
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.imageView);
         holder.title.setText(model.getTitle());
         holder.desc.setText(model.getDescription());
         holder.source.setText(model.getSource().getName());
-        holder.time.setText("\u2022"+Utils.DateToTimeFormat(model.getPublishedAt()));
+        holder.time.setText("\u2022" + Utils.DateToTimeFormat(model.getPublishedAt()));
         holder.author.setText(model.getAuthor());
-
-
     }
 
     @Override
@@ -90,25 +86,21 @@ private OnItemClickListener onItemClickListener;
         return articles.size();
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-
-    public interface OnItemClickListener{
-
+    public interface OnItemClickListener {
         void onItemClick(View view, int position);
-
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        TextView title,desc,author,published_at,source,time;
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView title, desc, author, published_at, source, time;
         ImageView imageView;
         ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
 
-        public MyViewHolder(View itemView,OnItemClickListener onItemClickListener) {
+        public MyViewHolder(View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
 
             itemView.setOnClickListener(this);
@@ -120,16 +112,12 @@ private OnItemClickListener onItemClickListener;
             time = itemView.findViewById(R.id.time);
             imageView = itemView.findViewById(R.id.image);
             progressBar = itemView.findViewById(R.id.progress_load_photo);
-
             this.onItemClickListener = onItemClickListener;
         }
 
         @Override
         public void onClick(View v) {
-
-            onItemClickListener.onItemClick(v,getAdapterPosition());
-
+            onItemClickListener.onItemClick(v, getAdapterPosition());
         }
     }
-
 }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.newshub.api.ApiClient;
@@ -21,13 +22,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    private String TAG = MainActivity.class.getSimpleName();
 
     public static final String API_KEY = "a46785213dc24f14ac6bcab6e4458166";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Article> articles = new ArrayList<>();
     private Adapter adapter;
-    private String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,41 +44,34 @@ public class MainActivity extends AppCompatActivity {
         LoadJson();
     }
 
-
-    public void LoadJson(){
-
+    public void LoadJson() {
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        String country = Utils.getCountry();
 
-                String country = Utils.getCountry();
-
-                Call<News> call;
-                call = apiInterface.getNews(country,API_KEY);
+        Call<News> call = apiInterface.getNews("bitcoin", "2020-02-13", "publishedAt", API_KEY);
         call.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
-                if (response.isSuccessful() && response.body().getArticle() != null){
-
-                    if (!articles.isEmpty()){
+                Log.d(TAG, "response.body(): " + response.body().toString());
+                if (response.isSuccessful() && response.body().getArticle() != null) {
+                    if (!articles.isEmpty()) {
                         articles.clear();
                     }
 
                     articles = response.body().getArticle();
-                    adapter = new Adapter(articles,MainActivity.this);
+                    adapter = new Adapter(articles, MainActivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
-                }else {
-                    Toast.makeText(MainActivity.this,"No Result!",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "No Result!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-
+                Log.e(TAG, t.getLocalizedMessage());
             }
         });
     }
-
-
-
 }

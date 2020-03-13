@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/Background">
+    android:background="@color/Background"
+    tools:context=".MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:textStyle="bold"
-                android:text="HeadLines"
-                android:fontFamily="sans-serif-light"
-                android:textSize="17sp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="10dp"/>
+                android:fontFamily="sans-serif-light"
+                android:text="HeadLines"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -34,11 +34,6 @@
                 android:scrollbars="vertical">
 
             </androidx.recyclerview.widget.RecyclerView>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
